@@ -8,7 +8,7 @@ export const CarDealsList = (props) => (
         {
         props.deals.length === 0 ? (
           <div className="list-item list-item--message">
-            <span>No expenses</span>
+            <span>No Deals</span>
           </div>
         ) : (
             props.deals.map((deal) => {
