@@ -1,20 +1,20 @@
 const carDeals = [
         {
             id: 1,
-            brandname: 'abc',
-            model:'abc',
-            price: 499.99,
+            brandname: 'Hyundai',
+            model:'Creta',
+            price: 983000,
             currency: 'INR',
-            type:'abc',
+            type:'SUV',
             dealername: 'abc'
           },
           {
             id: 2,
-            brandname: 'xyz',
-            model:'xyz',
-            price: 499.99,
+            brandname: 'Honda',
+            model:'Amaze',
+            price: 619000,
             currency: 'INR',
-            type:'xyz',
+            type:'Sedan',
             dealername: 'xyz'
           },
 
