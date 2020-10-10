@@ -1,7 +1,7 @@
 import {createStore,combineReducers} from 'redux';
 import carDealsReducer from '../reducers/cars/Deals.js';
 import carFiltersReducer from '../reducers/cars/Filters.js';
-
+import carDealsData from '../data/CarDeals.js'
 
 //Store Creation
 
@@ -11,6 +11,9 @@ export default () => {
             carDeals : carDealsReducer,
             carFilters : carFiltersReducer
         }),
+        {
+            carDeals:carDealsData
+        },
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
     return store;
