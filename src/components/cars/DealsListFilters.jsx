@@ -14,9 +14,6 @@ class DealsFilters extends React.Component{
           }
         }
 
-
-        
-
         updateBudgetChange(e,data){
           this.setState({value:data});
           this.props.dispatch(setBudget(data[0]*10000,data[1]*10000));
