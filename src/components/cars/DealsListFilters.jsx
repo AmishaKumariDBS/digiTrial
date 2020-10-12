@@ -1,7 +1,7 @@
 import React from 'react';
-import {Slider} from '@material-ui/core';
+import {Slider,Chip} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {setBudget} from '../../actions/cars/filters';
+import {setBudget,setBodyType} from '../../actions/cars/filters';
 
 class DealsFilters extends React.Component{
 
@@ -9,8 +9,8 @@ class DealsFilters extends React.Component{
         super(props);
 
         this.state = {
-            value: [50,100]
-          
+            value: [50,100],
+            bodyTypes:[{label:"SUV",variant:"default"},{label:"Hatchback",variant:"default"},{label:"Sedan",variant:"default"}]
           }
         }
 
@@ -18,6 +18,21 @@ class DealsFilters extends React.Component{
           this.setState({value:data});
           this.props.dispatch(setBudget(data[0]*10000,data[1]*10000));
         }
+
+        onSUVClick(data){
+          const types = this.state.bodyTypes.map((type)=>{
+            if(type===data){
+            type.variant = type.variant==="outlined"? "default":"outlined";}
+            return type;
+          });
+          this.setState({bodyTypes:types});
+          const filteredTypes = types.map((type)=>{
+              if(type.variant==="default")
+                return type.label;
+          });
+          this.props.dispatch(setBodyType(filteredTypes.filter((type)=>type!=undefined)));
+        }
+    
       
         render() {
           const marks = [
@@ -42,7 +57,9 @@ class DealsFilters extends React.Component{
               label: '10L',
             }
           ];
-      
+
+        
+
           return (
             <div style={{width:200, margin:30}}>
             Select Budget:
@@ -53,7 +70,18 @@ class DealsFilters extends React.Component{
               min={10}
               scale={(x) => x / 10}
               valueLabelDisplay="auto"
-             />
+             /><br />
+            <p>Select Body Type:</p>
+
+            {this.state.bodyTypes.map((type) => (<Chip 
+              label={type.label} 
+              variant = {type.variant}
+              color="primary"
+              clickable={true}
+              onClick={()=>this.onSUVClick(type)}
+              />))}
+
+
 
             </div>
           )

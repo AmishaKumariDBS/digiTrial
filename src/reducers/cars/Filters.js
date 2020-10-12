@@ -1,6 +1,7 @@
 const defaultFilters = {
     minPrice:500000,
-    maxPrice:1000000
+    maxPrice:1000000,
+    types:["SUV","Hatchback","Sedan"]
 };
 
 export default (state=defaultFilters,action) => {
@@ -10,6 +11,11 @@ export default (state=defaultFilters,action) => {
                 ...state,
                 minPrice:action.minPrice,
                 maxPrice:action.maxPrice
+            }
+        case 'SET_BODY_TYPE':
+            return{
+                ...state,
+                types:action.types
             }
         default:
              return state;

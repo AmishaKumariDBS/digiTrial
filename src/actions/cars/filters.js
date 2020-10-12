@@ -3,3 +3,8 @@ export const setBudget = (min,max) => ({
     minPrice:min,
     maxPrice:max
 })
+
+export const setBodyType = (types) => ({
+    type:'SET_BODY_TYPE',
+    types
+})
