@@ -3,7 +3,8 @@ import CarsDealsList from './cars/DealsList.jsx';
 import CarFilters from './cars/DealsListFilters.jsx';
 import {Link} from "react-router-dom";
 import {logout, isLogin} from './auth.js';
-import AppRouter from './routers/AppRouter.jsx';
+import AppRouter from '../routers/AppRouter.jsx';
+import LoginPage from "./LoginPage.jsx";
 
 class HomePage extends React.Component{
     constructor(props){
@@ -27,8 +28,9 @@ class HomePage extends React.Component{
         </div>
         {this.state.isLogin ?
                 <button onClick={() =>this.handleLogout()}>Logout</button>    
-           :<Link to="/signin"> Signin</Link>
-            }
+           :<><nav><Link to="/signin"> Signin</Link></nav>
+           <Route path="/signin" component={LoginPage} exact />
+           </> }
             </div>
         );
     }
