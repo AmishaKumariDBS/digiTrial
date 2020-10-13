@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import Dashboard from './components/Dashboard';
-import LoginPage from './components/LoginPage';
-import PrivateRoute from './components/privatePath';
-import PublicRoute from './components/publicPath';
+import HomePage from './components/HomePage.js';
+import dashboard from './components/dashboard.js';
+import LoginPage from './components/LoginPage.jsx';
+import privatePath from './components/privatePath.js';
+import publicPath from './components/publicPath.js';
 
 export default class AppRouter extends Component {
 
@@ -12,9 +12,9 @@ export default class AppRouter extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <PublicRoute restricted={false} component={HomePage} path="/" exact />
-          <PublicRoute restricted={true} component={LoginPage} path="/signin" exact />
-          <PrivateRoute component={Dashboard} path="/dashboard" exact />
+          <publicPath restricted={false} component={HomePage} path="/" exact />
+          <publicPath restricted={true} component={LoginPage} path="/signin" exact />
+          <privatePath component={dashboard} path="/dashboard" exact />
         </Switch>
       </BrowserRouter>
     );

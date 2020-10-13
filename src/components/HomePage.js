@@ -2,7 +2,8 @@ import React from 'react';
 import CarsDealsList from './cars/DealsList.jsx';
 import CarFilters from './cars/DealsListFilters.jsx';
 import {Link} from "react-router-dom";
-import {logout, isLogin} from './auth';
+import {logout, isLogin} from './auth.js';
+import AppRouter from './routers/AppRouter.jsx';
 
 class HomePage extends React.Component{
     constructor(props){
@@ -22,8 +23,9 @@ class HomePage extends React.Component{
                 <div style = {{display:"flex", flexDirection:"row", gap:"50px"}}>
         <CarFilters />
         <CarsDealsList />
+        <AppRouter/>
         </div>
-                {this.state.isLogin ?
+        {this.state.isLogin ?
                 <button onClick={() =>this.handleLogout()}>Logout</button>    
            :<Link to="/signin"> Signin</Link>
             }
