@@ -1,7 +1,10 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 
- const DealListItem = ({ id, brandname, model, price, currency, dealername, image}) => (
-    <div style = {{display:"flex", flexDirection:"row", gap:"50px"}}>
+ const DealListItem = ({ id, brandname, model, price, currency, dealername, image}) =>{
+    const history = useHistory();
+     return (
+    <div style = {{display:"flex", flexDirection:"row", gap:"50px", cursor:"pointer"}} onClick={() => history.push(`/cars/${id}`)}>
         <img src={image} alt="Deal_Image"/>
         <div>
         <h3>{brandname}</h3>
@@ -11,5 +14,6 @@ import React from 'react';
         </div>
     </div>
 );
+}
 
 export default DealListItem;

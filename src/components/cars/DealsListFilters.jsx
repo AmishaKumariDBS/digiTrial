@@ -109,8 +109,9 @@ class DealsFilters extends React.Component{
             onChange={e=>this.onSearch(e)}
             onKeyDown={e=>this.onSearch(e)}
             />
-            {this.state.searchInput.map((type) => (<Chip 
+            {this.state.searchInput.map((type,index) => (<Chip 
               label={type} 
+              key={index}
               variant = "outlined"
               color="primary"
               onDelete={()=>this.onSearchDelete(type)}
@@ -127,8 +128,9 @@ class DealsFilters extends React.Component{
              /><br />
 
             <p>Select Body Type:</p>
-            {this.state.bodyTypes.map((type) => (<Chip 
+            {this.state.bodyTypes.map((type,index) => (<Chip 
               label={type.label} 
+              key={index}
               variant = {type.variant}
               color="primary"
               clickable={true}
