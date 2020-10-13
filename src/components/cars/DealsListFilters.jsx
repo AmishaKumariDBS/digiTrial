@@ -1,7 +1,7 @@
 import React from 'react';
-import {Slider,Chip} from '@material-ui/core';
+import {Slider,Chip,TextField} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {setBudget,setBodyType} from '../../actions/cars/filters';
+import {setBudget,setBodyType,setSearch} from '../../actions/cars/filters';
 
 class DealsFilters extends React.Component{
 
@@ -10,16 +10,55 @@ class DealsFilters extends React.Component{
 
         this.state = {
             value: [50,100],
-            bodyTypes:[{label:"SUV",variant:"default"},{label:"Hatchback",variant:"default"},{label:"Sedan",variant:"default"}]
+            bodyTypes:[{label:"SUV",variant:"default"},{label:"Hatchback",variant:"default"},{label:"Sedan",variant:"default"}],
+            searchInput:[],
+            input:""
           }
         }
 
-        updateBudgetChange(e,data){
+          onSearch(e){
+            const input=e.target.value.trim();
+            let keywords=[""];
+             this.setState({
+              input
+             });
+
+             if((e.keyCode===13||e.keyCode===32)&& input && this.state.searchInput.indexOf(input)===-1)
+         { this.setState((prevState)=>({
+            searchInput:prevState.searchInput.concat(input)
+          }));
+        }
+
+        if((e.keyCode===13||e.keyCode===32))
+        this.setState({
+          input:""
+         });
+         keywords = this.state.searchInput;
+         if(input)
+         keywords = this.state.searchInput.concat(input);
+         if(keywords.length===0)
+         keywords=[input];
+         this.props.dispatch(setSearch(keywords));
+
+        }
+         
+
+       onSearchDelete(data){ 
+        const searchInput = this.state.searchInput.filter(item=>item!=data);
+        let keywords=[""];
+        this.setState({searchInput});
+        keywords = searchInput;
+        if(keywords.length===0)
+        keywords=[""];
+        this.props.dispatch(setSearch(keywords));
+     }
+
+        onBudgetChange(e,data){
           this.setState({value:data});
           this.props.dispatch(setBudget(data[0]*10000,data[1]*10000));
         }
 
-        onSUVClick(data){
+        onTypeChange(data){
           const types = this.state.bodyTypes.map((type)=>{
             if(type===data){
             type.variant = type.variant==="outlined"? "default":"outlined";}
@@ -62,23 +101,38 @@ class DealsFilters extends React.Component{
 
           return (
             <div style={{width:200, margin:30}}>
-            Select Budget:
+
+            <TextField 
+            value={this.state.input}
+            label="Search Model"
+            variant="outlined"
+            onChange={e=>this.onSearch(e)}
+            onKeyDown={e=>this.onSearch(e)}
+            />
+            {this.state.searchInput.map((type) => (<Chip 
+              label={type} 
+              variant = "outlined"
+              color="primary"
+              onDelete={()=>this.onSearchDelete(type)}
+              />))}<br />
+
+            <p>Select Budget:</p>
             <Slider
               value={this.state.value}
-              onChange={(e,data)=>this.updateBudgetChange(e,data)}
+              onChange={(e,data)=>this.onBudgetChange(e,data)}
               marks={marks}
               min={10}
               scale={(x) => x / 10}
               valueLabelDisplay="auto"
              /><br />
-            <p>Select Body Type:</p>
 
+            <p>Select Body Type:</p>
             {this.state.bodyTypes.map((type) => (<Chip 
               label={type.label} 
               variant = {type.variant}
               color="primary"
               clickable={true}
-              onClick={()=>this.onSUVClick(type)}
+              onClick={()=>this.onTypeChange(type)}
               />))}
 
 

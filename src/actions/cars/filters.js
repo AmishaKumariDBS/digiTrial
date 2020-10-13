@@ -8,3 +8,8 @@ export const setBodyType = (types) => ({
     type:'SET_BODY_TYPE',
     types
 })
+
+export const setSearch = (keywords) => ({
+    type:'SET_SEARCH',
+    keywords
+})
