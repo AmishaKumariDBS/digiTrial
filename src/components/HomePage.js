@@ -28,9 +28,9 @@ class HomePage extends React.Component{
         </div>
         {this.state.isLogin ?
                 <button onClick={() =>this.handleLogout()}>Logout</button>    
-           :<><nav><Link to="/signin"> Signin</Link></nav>
+           :<div><nav><Link to="/signin"> Signin</Link></nav>
            <Route path="/signin" component={LoginPage} exact />
-           </> }
+           </div> }
             </div>
         );
     }
