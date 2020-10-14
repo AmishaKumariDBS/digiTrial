@@ -1,11 +1,11 @@
 import React from 'react';
 import CarsDealsList from './cars/DealsList.jsx';
 import CarFilters from './cars/DealsListFilters.jsx';
-import {NavLink, Router} from "react-router-dom";
+import {Link, Router} from "react-router-dom";
 import {logout, isLogin} from './Auth.js';
 import AppRouter from '../routers/AppRouter.jsx';
 import LoginPage from "./LoginPage.jsx";
-import publicPath from "./PublicPath.js"
+import PublicPath from "./PublicPath.js"
 
 class HomePage extends React.Component{
     constructor(props){
@@ -25,14 +25,14 @@ class HomePage extends React.Component{
                 <div style = {{display:"flex", flexDirection:"row", gap:"50px"}}>
         <CarFilters />
         <CarsDealsList />
-        <AppRouter/>
+        
         </div>
         {this.state.isLogin ?
                 <button onClick={() =>this.handleLogout()}>Logout</button>    
-           :<div><NavLink to="/signin"> Signin</NavLink>
-           <Router restricted={true} component={LoginPage} path="/signin" exact />
+           :<Link to="/signin"> Signin</Link>
            
-           </div> }
+           
+           }
             </div>
         );
     }

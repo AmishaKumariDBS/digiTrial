@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { isLogin } from './Auth';
 
-const privatePath = ({component: Component, ...rest}) => {
+const PrivatePath = ({component: Component, ...rest}) => {
     return (
         <Route {...rest} render={props => (
             isLogin() ?
@@ -12,4 +12,4 @@ const privatePath = ({component: Component, ...rest}) => {
     );
 };
 
-export default privatePath;
+export default PrivatePath;
