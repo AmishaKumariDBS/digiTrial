@@ -14,7 +14,7 @@ class HomePage extends React.Component{
     }
     handleLogout = () =>{
         logout();
-        this.setStates({
+        this.setState({
             isLogin: false
         })
     }

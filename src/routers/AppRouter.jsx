@@ -3,8 +3,8 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import HomePage from '../components/HomePage.js';
 import Dashboard from '../components/Dashboard.js';
 import LoginPage from '../components/LoginPage.jsx';
-import {PrivatePath} from '../components/PrivatePath.js';
-import {PublicPath } from '../components/PublicPath.js';
+import PrivatePath from '../components/PrivatePath.js';
+import PublicPath  from '../components/PublicPath.js';
 
 export default class AppRouter extends React.Component {
 
