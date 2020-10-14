@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isLogin } from './auth';
+import { isLogin } from './Auth';
 
 const publicPath = ({component: Component, restricted, ...rest}) => {
     return (

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import HomePage from '../components/HomePage.js';
-import dashboard from '../components/dashboard.js';
+import dashboard from '../components/Dashboard.js';
 import LoginPage from '../components/LoginPage.jsx';
-import privatePath from '../components/privatePath.js';
-import publicPath from '../components/publicPath.js';
+import {privatePath} from '../components/PrivatePath.js';
+import {publicPath } from '../components/PublicPath.js';
 
 export default class AppRouter extends Component {
 
