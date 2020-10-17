@@ -8,7 +8,7 @@ const filteredDeals =  (carDeals,carFilters) => {
     const modelSearch = (carDeal) =>{
         let found =false;
          carFilters.keywords.forEach((keyword)=>{
-            if(carDeal.model.toLowerCase().includes(keyword.toLowerCase()))
+            if(carDeal.model.toLowerCase().includes(keyword.toLowerCase()) || carDeal.brandname.toLowerCase().includes(keyword.toLowerCase()))
             found= true;
         });
         return found;

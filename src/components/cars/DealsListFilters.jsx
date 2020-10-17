@@ -104,7 +104,7 @@ class DealsFilters extends React.Component{
 
             <TextField 
             value={this.state.input}
-            label="Search Model"
+            label="Search Cars"
             variant="outlined"
             onChange={e=>this.onSearch(e)}
             onKeyDown={e=>this.onSearch(e)}

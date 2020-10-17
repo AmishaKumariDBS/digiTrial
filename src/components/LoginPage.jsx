@@ -5,7 +5,7 @@ const LoginPage = (props) => {
 
     const handleLogin = () => {
         login();
-        props.history.push('/dashboard');
+        props.history.push('/homepage');
     }
 
     return (

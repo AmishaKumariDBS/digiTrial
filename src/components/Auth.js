@@ -1,10 +1,12 @@
-const TOKEN_KEY = 'amy';
+const TOKEN_KEY = 'ClientID';
 export const login = () =>{
-    localStorage.setItem(TOKEN_KEY, 'TestLogin');
+    localStorage.setItem(TOKEN_KEY, 'CI12345');
+    console.log(localStorage.getItem(TOKEN_KEY));
 }
 
 export const logout = () => {
-    localStorage.removeItem("TOKEN_KEY");
+    localStorage.setItem(TOKEN_KEY,'');
+    console.log(localStorage.getItem(TOKEN_KEY));
 }
 
 export const isLogin = () =>{
