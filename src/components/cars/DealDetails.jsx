@@ -12,7 +12,7 @@ const CarDealDetails = (props) => {
         <div>
             <div id="headerDetails" style = {{display:"flex", flexDirection:"row",gap:"50px",height:300}}>
                 <div id="imageDiv" style = {{width:"30%"}}>
-                    <img src={props.data.image} alt="deal image"/>
+                    <img src={"../"+props.data.image} alt="deal image"/>
                 </div>
                 <div >
                 <h3>{props.data.brandname}</h3>
