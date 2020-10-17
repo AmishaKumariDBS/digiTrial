@@ -10,7 +10,7 @@ const AppRouter = () => (
             <div>
                 <Link to="/">Login</Link>
                 <Link to="/cars">Cars</Link>
-                <Link to="/cars/12">Login</Link>
+                {/* <Link to="/cars/12">Login</Link> */}
             <Switch>
                 <Route path='/' component={LoginPage} exact={true}/>
                 <Route path="/cars" component={HomePage} exact={true}/>

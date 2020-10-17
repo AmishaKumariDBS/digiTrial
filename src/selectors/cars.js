@@ -1,4 +1,9 @@
-export default (carDeals,carFilters) => {
+export const getDealById = (carDeals,id) => {
+    return carDeals.filter((deal)=>deal.id==id)[0];
+}
+
+
+const filteredDeals =  (carDeals,carFilters) => {
     
     const modelSearch = (carDeal) =>{
         let found =false;
@@ -18,3 +23,5 @@ export default (carDeals,carFilters) => {
                ;
     });
 }
+
+export default filteredDeals;
