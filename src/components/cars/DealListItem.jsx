@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom';
     const history = useHistory();
      return (
     <div style = {{display:"flex", flexDirection:"row", gap:"50px", cursor:"pointer"}} onClick={() => history.push(`/cars/${id}`)}>
-        <img src={image} alt="Deal_Image"/>
+        <img src={require(`../../images/${image}`).default} alt="Deal_Image"/>
         <div>
         <h3>{brandname}</h3>
         <h4>{model}</h4>

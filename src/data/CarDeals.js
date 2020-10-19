@@ -7,7 +7,7 @@ const carDeals = [
             currency: 'INR',
             type:'SUV',
             dealername: 'abc',
-            image:'images/hyundai_creta.png'
+            image:'hyundai_creta.png'
           },
           {
             id: 2,
@@ -17,7 +17,7 @@ const carDeals = [
             currency: 'INR',
             type:'Sedan',
             dealername: 'xyz',
-            image:'images/honda_amaze.png'
+            image:'honda_amaze.png'
           },
 
 ];
