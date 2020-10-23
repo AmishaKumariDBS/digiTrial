@@ -13,6 +13,10 @@ module.exports = {
         test : /\.(jsx|js)$/,
         exclude:/node_modules/
       },{
+        test:/\.(jpg|jpeg|png)$/,
+        use:{
+          loader:"url-loader"
+      }},{
         test :/\.s?css$/,
         use: [
           'style-loader',

@@ -1,23 +1,23 @@
 const carDeals = [
         {
             id: 1,
-            brandname: 'Hyundai',
+            brand_name: 'Hyundai',
             model:'Creta',
             price: 983000,
             currency: 'INR',
             type:'SUV',
-            dealername: 'abc',
-            image:'images/hyundai_creta.png'
+            dealer_name: 'abc',
+            image:'hyundai_creta.png'
           },
           {
             id: 2,
-            brandname: 'Honda',
+            brand_name: 'Honda',
             model:'Amaze',
             price: 619000,
             currency: 'INR',
             type:'Sedan',
-            dealername: 'xyz',
-            image:'images/honda_amaze.png'
+            dealer_name: 'xyz',
+            image:'honda_amaze.png'
           },
 
 ];
