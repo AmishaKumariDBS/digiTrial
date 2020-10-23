@@ -1,32 +1,52 @@
-import React,{useRef, useEffect} from 'react';
+import React,{useRef, useEffect,useState} from 'react';
 import {connect} from 'react-redux';
-import {getDealById} from '../../selectors/cars.js'
+import {getDealById} from '../../selectors/cars.js';
+import {getCarDeals} from '../../services/carService';
+import {setDeals} from '../../actions/cars/deals';
 
 const scrollToRef=(ref)=>window.scrollTo(0,ref.current.offsetTop);
 const scrollToTop = () => window.scrollTo(0,0);
 const useMountEffect = (fun) => useEffect(fun,[]);
+
+
 const CarDealDetails = (props) => {
+    const [loading,setState] = useState(true);
+    useEffect(() => {
+        getCarDeals().then((response) => {
+            console.log("in response",response.data)
+            console.log("after set state",props);
+            props.dispatch(setDeals(response.data));
+            setState(false);
+          });
+      }, []);
+
     const headerref = useRef(null);
     const featuresref = useRef(null);
     const loanref = useRef(null);
     const dealerref = useRef(null);
     useMountEffect(()=>scrollToTop());
-    console.log(props.data);
+    console.log("27",props,loading);
     return (
         <div>
-            <div ref={headerref} id="headerDetails" style = {{display:"flex", flexDirection:"row",gap:"50px",height:300}}>
+        {
+            (loading===true)? (
+              <div className="list-item list-item--message">
+                <span>Loading</span>
+              </div>
+            ) :
+            (<div ref={headerref} id="headerDetails" style = {{display:"flex", flexDirection:"row",gap:"50px",height:300}}>
                 <div id="imageDiv" style = {{width:"30%"}}>
                     <img src={require(`../../images/${props.data.image}`).default} alt="deal image"/>
                 </div>
                 <div >
                 <h3>{props.data.brand_name}</h3>
                 <h4>{props.data.model}</h4>
-                <p>{props.data.currency}  {props.data.price}</p>
+                <p>INR  {props.data.price}</p>
                 <p>{props.data.dealer_name}</p>
                 <button>Apply for loan</button>
-                </div>
-
             </div>
+            </div>
+            )}
             <div>
                 <div  id="topicsDiv" style={{float:"left",width:"25%",position:"fixed"}}>
                     <div style={{cursor:"pointer"}} onClick={()=>scrollToRef(featuresref)}>Features & Specs</div>
@@ -44,8 +64,10 @@ const CarDealDetails = (props) => {
                 </div>
             </div>
         </div>
-    );
+     );
 }
+
+
 
 const mapStateToProps = (state,props) => {
     return {
