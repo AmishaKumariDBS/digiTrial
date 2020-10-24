@@ -11,6 +11,11 @@ const CarDealDetails = (props) => {
     const loanref = useRef(null);
     const dealerref = useRef(null);
     useMountEffect(()=>scrollToTop());
+    const handleLoan = () => {
+        props.history.push('/loanpage')
+    }
+
+    
     console.log(props.data);
     return (
         <div>
@@ -23,7 +28,7 @@ const CarDealDetails = (props) => {
                 <h4>{props.data.model}</h4>
                 <p>{props.data.currency}  {props.data.price}</p>
                 <p>{props.data.dealername}</p>
-                <button>Apply for loan</button>
+                <button onClick={() => handleLoan()}>Apply for loan </button>
                 </div>
 
             </div>
