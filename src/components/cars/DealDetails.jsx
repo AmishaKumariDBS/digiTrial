@@ -46,7 +46,7 @@ const CarDealDetails = (props) => {
                 </div>
                 <div >
                 <h3>{props.data.brand_name}</h3>
-                <h4>{props.data.model}</h4>
+                <h4>{props.data.car_name}</h4>
                 <p>INR  {props.data.price}</p>
                 <p>{props.data.dealer_name}</p>
                 <button onClick={()=>handleLoan()}>Apply for loan</button>

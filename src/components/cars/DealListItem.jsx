@@ -2,7 +2,7 @@ import React from 'react';
 import {useHistory} from 'react-router-dom';
 
 
- const DealListItem = ({ id, brand_name, model, price, dealer_name, image}) =>{
+ const DealListItem = ({ id, brand_name, car_name, price, dealer_name, image}) =>{
     const history = useHistory();
 
      return (
@@ -10,7 +10,7 @@ import {useHistory} from 'react-router-dom';
         <img src={require(`../../images/${image}`).default} alt="Deal_Image"/>
         <div>
         <h3>{brand_name}</h3>
-        <h4>{model}</h4>
+        <h3>{car_name}</h3>
         <p>INR  {price}</p>
         <p>{dealer_name}</p>
         </div>
