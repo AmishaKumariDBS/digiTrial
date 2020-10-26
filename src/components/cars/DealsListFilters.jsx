@@ -1,7 +1,7 @@
 import React from 'react';
 import {Slider,Chip,TextField} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {setBudget,setBodyType,setSearch} from '../../actions/cars/filters';
+import {setBudget,setBodyType,setSearch,setSort,setOrder} from '../../actions/cars/filters';
 
 class DealsFilters extends React.Component{
 
@@ -13,7 +13,9 @@ class DealsFilters extends React.Component{
             bodyTypes:[{label:"SUV",variant:"default"},{label:"Hatchback",variant:"default"},{label:"Sedan",variant:"default"},{label:"MUV",variant:"default"},{label:"Minivan",variant:"default"},
             {label:"Coupe",variant:"default"},{label:"Hybrid",variant:"default"},{label:"Luxury",variant:"default"},{label:"Convertible",variant:"default"},{label:"Pickup Truck",variant:"default"},{label:"Wagon",variant:"default"}],
             searchInput:[],
-            input:""
+            input:"",
+            sortBy:"price",
+            order:1
           }
         }
 
@@ -72,7 +74,12 @@ class DealsFilters extends React.Component{
           });
           this.props.dispatch(setBodyType(filteredTypes.filter((type)=>type!=undefined)));
         }
-    
+        
+        changeOrder(){
+          const order = this.state.order;
+          this.setState({order:(order*-1)});
+          this.props.dispatch(setOrder(order*-1));
+        }
       
         render() {
           const marks = [
@@ -101,23 +108,25 @@ class DealsFilters extends React.Component{
         
 
           return (
-            <div style={{width:200, margin:30}}>
+            <div style={{width:250, margin:30}}>
 
             Sort By: <select 
                     className="select"
-                    // value={this.props.filters.sortBy} 
-                    // onChange={(e)=>{
-                    //     switch(e.target.value){
-                    //         case 'date': this.props.dispatch(sortByDate());break;
-                    //         case 'amount': this.props.dispatch(sortByAmount());break;
-                    //     }
-                    // }}
+                    value={this.state.sortBy} 
+                    onChange={(e)=>{
+                        this.setState({sortBy:e.target.value});
+                        switch(e.target.value){
+                            case 'name': this.props.dispatch(setSort("name"));break;
+                            case 'price': this.props.dispatch(setSort("price"));break;
+                        }
+                    }}
           
                     >
           
-                        <option value="date">Date</option>
-                        <option value="amount">Amount</option>
-                    </select><br/>
+                        <option value="name">Name</option>
+                        <option value="price">Price</option>
+                    </select>
+                    {(this.state.order===1)?<button onClick={()=>this.changeOrder()}>Ascending</button>:<button onClick={()=>this.changeOrder()}>Descending</button>}<br/><br/>
 
             <TextField 
             value={this.state.input}

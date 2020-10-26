@@ -16,19 +16,24 @@ const filteredDeals =  (carDeals,carFilters) => {
         return found;
     }
     
-        console.log("in selector",carDeals);
+       // console.log("in selector",carDeals);
        return carDeals.filter((carDeal)=>{
     //             console.log("inside filter",carDeal.price >= carFilters.minPrice && 
     //             carDeal.price <= carFilters.maxPrice && 
     //             carFilters.types.indexOf(carDeal.type)>-1 &&
     //             modelSearch(carDeal));
                // console.log("car price="+carDeal.price+"car type"+carDeal.type);
-               console.log("image="+carDeal.image+" ID = "+carDeal.id);
+               //console.log("image="+carDeal.image+" ID = "+carDeal.id);
         return carDeal.price >= carFilters.minPrice && 
                carDeal.price <= carFilters.maxPrice && 
                carFilters.types.indexOf(carDeal.type)>-1 &&
                modelSearch(carDeal)
                ;
+    }).sort((a,b)=>{
+        switch(carFilters.sortBy){
+            case 'name' : return a.car_name > b.car_name ? carFilters.order:(-1*carFilters.order);
+            case 'price': return parseInt(a.price) > parseInt(b.price) ? carFilters.order:(-1*carFilters.order);
+        }
     });
 }
 
