@@ -4,7 +4,7 @@ import {getDealById} from '../../selectors/cars.js'
 import {DealDetails} from './DealDetails.jsx';
 import {getCarDeals} from '../../services/carService';
 import {setDeals} from '../../actions/cars/deals';
-
+import {appliedLoans} from '../../actions/Loan';
 class HandleLoan extends Component{
 constructor(props)
 {
@@ -15,7 +15,8 @@ this.state = {
     loading:true,
     time:24,
     loanAmountdisplay:0,
-
+    loanAmount_request:0,
+    emi:0,
     }; 
  
 }
@@ -75,6 +76,7 @@ alert("you are enetering more than eligibility");
 
 emiCal(e){
     var principal=e.target.value;
+    this.setState({loanAmount_request:principal})
     var time=this.state.time;
     var rate;
     if(time==24){
@@ -94,6 +96,7 @@ emiCal(e){
     console.log("emifinal ",emi);
    
 }
+
 /*loanCal(e){
     var time=e.target.value;
     var loanAmount=0;
@@ -130,6 +133,23 @@ updatetime(e){
     console.log(this.state.loanAmountdisplay);
 }
 
+onApply(){
+    var clientId=this.props.data[0].id;
+
+    var emi=this.state.emi;
+    this.setState({emi:emi});
+    //console.log("my emi is ",emi);
+    var loanAmount=this.state.loanAmount_request;
+    this.setState({loanAmount:loanAmount});
+    var carCost=this.props.CarData.price;
+    this.setState({carCost:carCost});
+    var selectedFile=this.state.selectedFile;
+    this.setState({selectedFile:selectedFile});
+    this.props.dispatch(appliedLoans(clientId,loanAmount,emi,carCost,selectedFile));
+    this.props.history.push(`/appliedloan`);
+
+ 
+}
 
 fileData = () => { 
      
@@ -195,11 +215,12 @@ render(){
                     <option value="60">60 months</option>
                 </select>
               <h2>your loan amount eleigibility is INR {this.state.loanAmountdisplay.toFixed(2)}</h2>
+              <label>Enter your Loan Amount :</label>
                 <input type="number" name="quantity" onChange={(e)=>this.loan(e)} required/><br></br>
                 <h2>U need to pay EMI INR {this.state.emi}</h2>
-                
+            <h2>For your car to buy, bank will provide loan of INR {this.state.loanAmount_request} and you ned to pay INR {this.props.CarData.price-this.state.loanAmount_request}</h2>
             <h3> 
-			Upload scanned copy for your document for proof
+			Upload scanned copy for your document :
 			</h3> 
 			<div> 
 				<input type="file" onChange={this.onFileChange} required/> 
@@ -208,7 +229,7 @@ render(){
 				</button> 
 			</div> 
 		{this.fileData()}
-    <button type="submit">Submit my request to bank</button>
+    <button type="submit" onClick={()=>this.onApply()} >Submit my request to bank</button>
     </form>
         )  }
     </div>
