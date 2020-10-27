@@ -4,6 +4,7 @@ import DealListItem from './DealListItem.jsx';
 import selectCarDeals from '../../selectors/cars.js';
 import {getCarDeals} from '../../services/carService';
 import {setDeals} from '../../actions/cars/deals';
+import {Pagination} from '@material-ui/lab';
 
 class CarDealsList extends React.Component{
 
@@ -12,10 +13,12 @@ class CarDealsList extends React.Component{
 
     this.state = {
         loading:true,
+        currentPage:1,
+        dealsPerPage:5
       }
     }
   
-  componentDidMount(){
+  componentWillMount(){
       
     getCarDeals().then((response) => {
       console.log("in response",response.data)
@@ -24,7 +27,23 @@ class CarDealsList extends React.Component{
     });
   }
 
+  UNSAFE_componentWillReceiveProps(){
+    this.setState({currentPage:this.props.filters.page});
+  }
+
+  onPageChange(e,page){
+    this.setState({currentPage:page});
+    window.scrollTo(0,0);
+  }
+
 render(){
+
+  const indexOfLastDeal = this.state.currentPage * this.state.dealsPerPage;
+  const indexOfFirstDeal = indexOfLastDeal - this.state.dealsPerPage;
+  const currentDeals = this.props.deals.slice(indexOfFirstDeal,indexOfLastDeal);
+
+  
+
   return (
     <div>
         {
@@ -33,23 +52,44 @@ render(){
             <span>Loading</span>
           </div>
         ) :
-          (this.props.deals.length === 0 ? (
+          ( 
+            this.props.deals.length === 0 ? (
           <div className="list-item list-item--message">
             <span>No Deals</span>
           </div>
         ) : (
-            this.props.deals.map((deal) => {
+          <div>
+          <Pagination count={parseInt((this.props.deals.length%this.state.dealsPerPage==0)?
+                                      this.props.deals.length/this.state.dealsPerPage:
+                                      this.props.deals.length/this.state.dealsPerPage+1
+            )}  
+           onChange = {(e,page)=>this.onPageChange(e,page)}
+           page={this.state.currentPage}
+           color="primary"
+           />
+          
+            {currentDeals.map((deal) => {
               return <DealListItem key={deal.id} {...deal} />;
-            })
+            })}
+          </div>
           ))
         }
+        <Pagination count={parseInt((this.props.deals.length%this.state.dealsPerPage==0)?
+                                    this.props.deals.length/this.state.dealsPerPage:
+                                    this.props.deals.length/this.state.dealsPerPage+1
+          )}  
+          onChange = {(e,page)=>this.onPageChange(e,page)}
+          page={this.state.currentPage}
+          color="primary"
+          />
     </div>
 );}
       }
 
 const mapStateToProps = (state) => {
     return {
-        deals : selectCarDeals(state.carDeals,state.carFilters)
+        deals : selectCarDeals(state.carDeals,state.carFilters),
+        filters:state.carFilters
     };
 };
 

@@ -4,7 +4,8 @@ const defaultFilters = {
     types:["SUV","Hatchback","Sedan","MUV","Minivan","Coupe","Hybrid","Luxury","Convertible","Pickup Truck","Wagon"],
     keywords:[""],
     sortBy:"price",
-    order:1
+    order:1,
+    page:1
 };
 
 export default (state=defaultFilters,action) => {
@@ -13,27 +14,32 @@ export default (state=defaultFilters,action) => {
             return{
                 ...state,
                 minPrice:action.minPrice,
-                maxPrice:action.maxPrice
+                maxPrice:action.maxPrice,
+                page:1
             }
         case 'SET_BODY_TYPE':
             return{
                 ...state,
-                types:action.types
+                types:action.types,
+                page:1
             }
         case 'SET_SEARCH':
             return{
                 ...state,
-                keywords:action.keywords
+                keywords:action.keywords,
+                page:1
             }
         case 'SET_SORT':
             return{
                 ...state,
-                sortBy:action.sortBy
+                sortBy:action.sortBy,
+                page:1
             }
         case 'SET_ORDER':
             return{
                 ...state,
-                order:action.order
+                order:action.order,
+                page:1
             }
         default:
              return state;

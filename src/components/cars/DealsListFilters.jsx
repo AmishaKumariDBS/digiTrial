@@ -2,6 +2,7 @@ import React from 'react';
 import {Slider,Chip,TextField} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {setBudget,setBodyType,setSearch,setSort,setOrder} from '../../actions/cars/filters';
+import {onPageChange} from './DealsList.jsx';
 
 class DealsFilters extends React.Component{
 
