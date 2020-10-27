@@ -2,6 +2,7 @@ import React from 'react';
 import {Slider,Chip,TextField} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {setBudget,setBodyType,setSearch,setSort,setOrder} from '../../actions/cars/filters';
+import {onPageChange} from './DealsList.jsx';
 
 class DealsFilters extends React.Component{
 
@@ -9,7 +10,7 @@ class DealsFilters extends React.Component{
         super(props);
 
         this.state = {
-            value: [50,100],
+            value: [10,20],
             bodyTypes:[{label:"SUV",variant:"default"},{label:"Hatchback",variant:"default"},{label:"Sedan",variant:"default"},{label:"MUV",variant:"default"},{label:"Minivan",variant:"default"},
             {label:"Coupe",variant:"default"},{label:"Hybrid",variant:"default"},{label:"Luxury",variant:"default"},{label:"Convertible",variant:"default"},{label:"Pickup Truck",variant:"default"},{label:"Wagon",variant:"default"}],
             searchInput:[],
@@ -58,7 +59,69 @@ class DealsFilters extends React.Component{
 
         onBudgetChange(e,data){
           this.setState({value:data});
-          this.props.dispatch(setBudget((data[0]*(118/100)+2)*100000,(data[1]*(118/100)+2)*100000));
+          console.log(`data[0] val:${data[0]}`);
+          console.log(`data[1] val:${data[1]}`);
+          let min,max;
+          if(data[0]<=20){
+            //console.log(`min price: ${(data[0]/2)*100000}`)
+            min = (data[0]/2)*100000;
+          }
+          else if(data[0]>20 && data[0]<=60){
+            let y=10;
+            let x=data[0];
+            let inc=parseFloat((x-20)/5);
+            inc=inc*5;
+            inc=inc+y;
+           // console.log(`min price:${inc*100000}`);
+            min = inc*100000;
+          }
+          else if(data[0]>60 && data[0]<=80){
+            let x=data[0];  
+            let y=50;
+            let inc=parseFloat((x-60)/4);
+            inc = inc*10;
+            inc = inc+y;
+            min = inc*100000;
+            //console.log(`min price:${inc*100000}`);
+          }
+          else if(data[0]>80 && data[0]<=100){
+            let x=data[0];
+            x = x-79;
+            min = x*10000000;
+            //console.log(`min price:${x*10000000}`);
+          }
+          // for data[1]
+          if(data[1]<=20){
+            //console.log(`max price: ${(data[1]/2)*100000}`)
+            max = (data[1]/2)*100000;
+          }
+          else if(data[1]>20 && data[1]<=60){
+            let y=10;
+            let x=data[1];
+            let inc=parseFloat((x-20)/5);
+            inc=inc*5;
+            inc=inc+y;
+            //console.log(`max price:${inc*100000}`);
+            max = inc*100000;
+          }
+          else if(data[1]>60 && data[1]<=80){
+            let x=data[1];  
+            let y=50;
+            let inc=parseFloat((x-60)/4);
+            inc = inc*10;
+            inc = inc+y;
+            max = inc*100000;
+           // console.log(`max price:${inc*100000}`);
+          }
+          else if(data[1]>80 && data[1]<=100){
+            let x=data[1];
+            x = x-79;
+            max =x*10000000;
+            //console.log(`max price:${x*10000000}`);
+          }
+
+          this.props.dispatch(setBudget(min,max));
+          console.log(`min price:${min} max price:${max}`);
         }
 
         onTypeChange(data){
@@ -84,24 +147,24 @@ class DealsFilters extends React.Component{
         render() {
           const marks = [
             {
-              value: 0,
-              label: '2L',
+              value: 1,
+              label: '0.5L',
             },
             {
-              value: 23.4,
-              label: '30L',
+              value: 20,
+              label: '10L',
             },
             {
-              value: 48.8,
-              label: '60L',
+              value: 60,
+              label: '50L',
             },
             {
-              value: 74.2,
-              label: '90L',
+              value: 80,
+              label: '1Cr',
             },
             {
-              value: 100,
-              label: '1.2C',
+              value: 99,
+              label: '20Cr',
             }
           ];
 
@@ -148,8 +211,30 @@ class DealsFilters extends React.Component{
               value={this.state.value}
               onChange={(e,data)=>this.onBudgetChange(e,data)}
               marks={marks}
-              min={0}
-              scale={(x) => parseFloat(x*(118/100)+2).toFixed(1)}
+              min={1}
+              max={99}
+              scale={(x) =>{
+                if(x<=20){ //x%2==0 && 
+                  return parseFloat(x/2).toFixed(1);
+                }
+                else if(x>20 && x<=60){ //x%5==0 && 
+                  let y=10;
+                  let inc = parseFloat((x-20)/5);
+                  inc=inc*5;
+                  return parseFloat(y+inc).toFixed(1);
+                }
+                else if(x>60 && x<80){ //x%4==0 && 
+                  let y=50;
+                  let inc=parseFloat((x-60)/4);
+                  inc = inc*10;
+                  return parseFloat(inc+y).toFixed(1);
+                }
+                else if(x>=80 && x<=100){
+                  return x-79;
+                }
+                
+              }
+              }//change
               valueLabelDisplay="auto"
              /><br />
 

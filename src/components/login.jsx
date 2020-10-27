@@ -10,9 +10,6 @@ class Login extends React.Component{
         };
         this.onClickLoginButton=this.onClickLoginButton.bind(this);
         this.updateClientId=this.updateClientId.bind(this);
-        // this.updatePassword=this.updatePassword.bind(this);
-        // this.onClickSetPasswordButton=this.onClickSetPasswordButton.bind(this);
-        // this.onClickForgotPasswordButton=this.onClickForgotPasswordButton.bind(this);
      }
     
     updateClientId(e){
@@ -33,26 +30,18 @@ class Login extends React.Component{
 
     onClickLoginButton(){
         if(this.state.clientId){
-            console.log(this.state.clientId);            
-            // console.log(this.state.password);
+            console.log(this.state.clientId);
             let clientVar=this.state.clientId;
-            // let passwordVar=this.state.password;
-
+            if(clientVar<200){
             let flag=true;
             for(let i=0;i<this.props.userData.length;i++){
                 if(this.props.userData[i].clientId == clientVar){
                     console.log("Success"); 
-                    // localStorage.setItem("clientId",clientVar);
                     localStorage.setItem("emailId",this.props.userData[i].emailId);
                     localStorage.setItem("mobileNo",this.props.userData[i].mobileNo);
                     localStorage.setItem("loanCategory",this.props.userData[i].loanCategory);
                     localStorage.setItem("eligibleLoanAmount",this.props.userData[i].eligibleLoanAmount);
-                    // let a=localStorage.getItem("clientId");
-                    // console.log(`local item: ${a}`);
                     alert(`Welcome ${clientVar}`);
-
-                    //Send the login data to the local storage
-                   // this.props.history.push('/profile');
                     login(this.state.clientId);
                     this.props.history.push('/homepage');
                     flag=!flag;
@@ -63,33 +52,21 @@ class Login extends React.Component{
                 alert("Enter correct");
                 console.log("NOT");
             }
-            // this.props.userData.forEach((user)=>{
-            //     console.log(`user.clid:${user.clientId}`);
-            //     console.log(`user.pwd:${user.password}`);
-            //     if(user.clientId == clientVar && user.password == passwordVar){
-            //         console.log("Sucess");
-            //         flag=!flag;
-            //         break;
-            //     }
-            // });
-            // if(flag){
-            //     console.log("Not Success");
-            //     this.props.history.push("/");
-            // }
+        }
+        else if(clientVar>=200 && clientVar<300){
+            //Login for Dealer
+            this.props.history.push("/dealer");
+        }
+        else if(clientVar>=300 && clientVar<400){
+            //Login for Admin
+            this.props.history.push("/admin");
+        }
 
-
-            
-            // if(props.userData){
-            //     alert("Login Successful");
-            // }
-            // else{
-            //     alert("Login Not Successful");
-            // }
 
         }
         else{
             console.log("input field is empty");
-            this.props.history.push("/");
+            this.props.history.push("/login");
         }
     }
 
@@ -108,7 +85,8 @@ class Login extends React.Component{
         return(
             <div>
                 <div style={{backgroundColor:"red",color:"white", border:"solid",width:"30%", textAlign:"center",borderBlock:"black",transform:"translateX(160%)",marginTop:"6%"}}>
-                Client ID: <input style={{ marginTop:"20%",marginBottom:"5%"}} type="text" onChange={this.updateClientId} /><br/>
+                <p>Dear {localStorage.getItem("roleName")} please enter your ID to login </p><br/>
+                <p>{localStorage.getItem("roleName")} ID: </p><input style={{ marginTop:"20%",marginBottom:"5%"}} type="text" onChange={this.updateClientId} /><br/>
                 {/* Password: <input style={{ marginTop:"5%",marginBottom:"5%"}} type="password" onChange={this.updatePassword}/><br/> */}
                 <button style={{ backgroundColor:"red",color:"white",marginTop:"5%",marginBottom:"20%",paddingRight:"7%",paddingLeft:"7%"}} id="loginButton" onClick={()=>{this.onClickLogin()}}>Login</button>
                 {/* <p>Logging in for the first time?</p> */}
