@@ -2,7 +2,9 @@ const defaultFilters = {
     minPrice:500000,
     maxPrice:1000000,
     types:["SUV","Hatchback","Sedan"],
-    keywords:[""]
+    keywords:[""],
+    sortBy:"price",
+    order:1
 };
 
 export default (state=defaultFilters,action) => {
@@ -18,11 +20,21 @@ export default (state=defaultFilters,action) => {
                 ...state,
                 types:action.types
             }
-            case 'SET_SEARCH':
-                return{
-                    ...state,
-                    keywords:action.keywords
-                }
+        case 'SET_SEARCH':
+            return{
+                ...state,
+                keywords:action.keywords
+            }
+        case 'SET_SORT':
+            return{
+                ...state,
+                sortBy:action.sortBy
+            }
+        case 'SET_ORDER':
+            return{
+                ...state,
+                order:action.order
+            }
         default:
              return state;
     }

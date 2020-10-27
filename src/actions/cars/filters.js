@@ -13,3 +13,13 @@ export const setSearch = (keywords) => ({
     type:'SET_SEARCH',
     keywords
 })
+
+export const setSort = (sortBy) => ({
+    type:'SET_SORT',
+    sortBy
+})
+
+export const setOrder = (order) => ({
+    type:'SET_ORDER',
+    order
+})

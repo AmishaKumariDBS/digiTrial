@@ -13,7 +13,7 @@ module.exports = {
         test : /\.(jsx|js)$/,
         exclude:/node_modules/
       },{
-        test:/\.(jpg|jpeg|png)$/,
+        test:/\.(jpg|jpeg|png|webp)$/,
         use:{
           loader:"url-loader"
       }},{

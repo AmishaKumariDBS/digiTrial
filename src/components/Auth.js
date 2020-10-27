@@ -1,6 +1,6 @@
 const TOKEN_KEY = 'ClientID';
-export const login = () =>{
-    localStorage.setItem(TOKEN_KEY, 'CI12345');
+export const login = (id) =>{
+    localStorage.setItem(TOKEN_KEY,id);
     console.log(localStorage.getItem(TOKEN_KEY));
 }
 

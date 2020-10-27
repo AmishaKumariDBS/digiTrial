@@ -1,7 +1,7 @@
 import React from 'react';
 import {Slider,Chip,TextField} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {setBudget,setBodyType,setSearch} from '../../actions/cars/filters';
+import {setBudget,setBodyType,setSearch,setSort,setOrder} from '../../actions/cars/filters';
 
 class DealsFilters extends React.Component{
 
@@ -10,9 +10,12 @@ class DealsFilters extends React.Component{
 
         this.state = {
             value: [50,100],
-            bodyTypes:[{label:"SUV",variant:"default"},{label:"Hatchback",variant:"default"},{label:"Sedan",variant:"default"}],
+            bodyTypes:[{label:"SUV",variant:"default"},{label:"Hatchback",variant:"default"},{label:"Sedan",variant:"default"},{label:"MUV",variant:"default"},{label:"Minivan",variant:"default"},
+            {label:"Coupe",variant:"default"},{label:"Hybrid",variant:"default"},{label:"Luxury",variant:"default"},{label:"Convertible",variant:"default"},{label:"Pickup Truck",variant:"default"},{label:"Wagon",variant:"default"}],
             searchInput:[],
-            input:""
+            input:"",
+            sortBy:"price",
+            order:1
           }
         }
 
@@ -55,7 +58,7 @@ class DealsFilters extends React.Component{
 
         onBudgetChange(e,data){
           this.setState({value:data});
-          this.props.dispatch(setBudget(data[0]*10000,data[1]*10000));
+          this.props.dispatch(setBudget((data[0]*(118/100)+2)*100000,(data[1]*(118/100)+2)*100000));
         }
 
         onTypeChange(data){
@@ -63,7 +66,7 @@ class DealsFilters extends React.Component{
             if(type===data){
             type.variant = type.variant==="outlined"? "default":"outlined";}
             return type;
-          });
+          }  );
           this.setState({bodyTypes:types});
           const filteredTypes = types.map((type)=>{
               if(type.variant==="default")
@@ -71,36 +74,59 @@ class DealsFilters extends React.Component{
           });
           this.props.dispatch(setBodyType(filteredTypes.filter((type)=>type!=undefined)));
         }
-    
+        
+        changeOrder(){
+          const order = this.state.order;
+          this.setState({order:(order*-1)});
+          this.props.dispatch(setOrder(order*-1));
+        }
       
         render() {
           const marks = [
             {
-              value: 10,
-              label: '1L',
+              value: 0,
+              label: '2L',
             },
             {
-              value: 25,
-              label: '2.5L',
+              value: 23.4,
+              label: '30L',
             },
             {
-              value: 50,
-              label: '5L',
+              value: 48.8,
+              label: '60L',
             },
             {
-              value: 75,
-              label: '7.5L',
+              value: 74.2,
+              label: '90L',
             },
             {
               value: 100,
-              label: '10L',
+              label: '1.2C',
             }
           ];
 
         
 
           return (
-            <div style={{width:200, margin:30}}>
+            <div style={{width:250, margin:30}}>
+
+            Sort By: <select 
+                    className="select"
+                    value={this.state.sortBy} 
+                    onChange={(e)=>{
+                        this.setState({sortBy:e.target.value});
+                        switch(e.target.value){
+                            case 'name': this.props.dispatch(setSort("name"));break;
+                            case 'price': this.props.dispatch(setSort("price"));break;
+                        }
+                    }}
+          
+                    >
+          
+                        <option value="name">Name</option>
+                        <option value="price">Price</option>
+                    </select>
+                    {(this.state.order===1)?<button onClick={()=>this.changeOrder()}>Ascending</button>:<button onClick={()=>this.changeOrder()}>Descending</button>}<br/><br/>
 
             <TextField 
             value={this.state.input}
@@ -122,8 +148,8 @@ class DealsFilters extends React.Component{
               value={this.state.value}
               onChange={(e,data)=>this.onBudgetChange(e,data)}
               marks={marks}
-              min={10}
-              scale={(x) => x / 10}
+              min={0}
+              scale={(x) => parseFloat(x*(118/100)+2).toFixed(1)}
               valueLabelDisplay="auto"
              /><br />
 
