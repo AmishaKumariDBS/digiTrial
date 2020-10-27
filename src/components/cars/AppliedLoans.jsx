@@ -15,7 +15,8 @@ render(){
         <div>        
     <h2>My Details</h2>
         Client ID: <p>{localStorage.getItem("ClientID")}</p>
-        Car Cost :INR{this.props.data.carCost}
+        Car Cost :INR{this.props.data.carCost} <br />
+        Loan Tenure Period :{this.props.data.time} Months
     <br />Loan Amount you have requested for : INR {this.props.data.loanAmount}<br/>
     You need to pay EMI INR {this.props.data.emi}<br />
     submitted document is {this.props.data.selectedFile.name}

@@ -134,19 +134,25 @@ updatetime(e){
 }
 
 onApply(){
-    var clientId=this.props.data[0].id;
-
-    var emi=this.state.emi;
-    this.setState({emi:emi});
+    
+    const clientId=this.props.data[0].id;
+    const emi=this.state.emi;
+    const time = this.state.time;
+    //this.setState({emi:emi});
     //console.log("my emi is ",emi);
-    var loanAmount=this.state.loanAmount_request;
-    this.setState({loanAmount:loanAmount});
-    var carCost=this.props.CarData.price;
-    this.setState({carCost:carCost});
-    var selectedFile=this.state.selectedFile;
-    this.setState({selectedFile:selectedFile});
-    this.props.dispatch(appliedLoans(clientId,loanAmount,emi,carCost,selectedFile));
-    this.props.history.push(`/appliedloan`);
+    const loanAmount=this.state.loanAmount_request;
+    //this.setState({loanAmount:loanAmount});
+    const carCost=this.props.CarData.price;
+    //this.setState({carCost:carCost});
+    const selectedFile=this.state.selectedFile;
+    //this.setState({selectedFile:selectedFile});
+    if(selectedFile!= null &&
+        loanAmount>0 &&
+        emi>0){
+    this.props.dispatch(appliedLoans(clientId,loanAmount,emi,carCost,selectedFile,time));
+    this.props.history.push(`/appliedloan`);}
+    else
+    alert("Enter All Details");
 
  
 }
@@ -208,15 +214,15 @@ render(){
                
                 <h3>Select Tenure</h3>
                 <select onChange={(e)=>this.updatetime(e)} required>
-                    <option value="select time">select</option>
+                    <option value="select time" disabled selected>select Tenure</option>
                     <option value="24">24 months</option>
                     <option value="36">36 months</option>
                     <option value="48">48 months</option>
                     <option value="60">60 months</option>
                 </select>
-              <h2>your loan amount eleigibility is INR {this.state.loanAmountdisplay.toFixed(2)}</h2>
+              <h2>your loan amount eligibility is INR {this.state.loanAmountdisplay.toFixed(2)}</h2>
               <label>Enter your Loan Amount :</label>
-                <input type="number" name="quantity" onChange={(e)=>this.loan(e)} required/><br></br>
+                <input type="number" name="quantity" onChange={(e)=>this.loan(e)} value={this.state.loanAmount_request} required/><br></br>
                 <h2>U need to pay EMI INR {this.state.emi}</h2>
             <h2>For your car to buy, bank will provide loan of INR {this.state.loanAmount_request} and you ned to pay INR {this.props.CarData.price-this.state.loanAmount_request}</h2>
             <h3> 
