@@ -9,6 +9,9 @@ import PublicPath  from './PublicPath.js';
 import NotFoundPage from '../components/NotFoundPage';
 import HandleLoan from '../components/cars/HandleLoan.jsx'
 import Profile from '../components/profile.jsx';
+import HeroPage from '../components/heroPage.jsx'
+import DealerHome from '../components/dealerHome.jsx'
+import AdminHome from '../components/adminHome.jsx'
 export const history = createBrowserHistory();
 
 const AppRouter = () => (
@@ -22,9 +25,12 @@ const AppRouter = () => (
                 <PrivatePath path="/homepage" component={HomePage} exact={true}/>
                 <PrivatePath path="/cars/:id" component={DealDetails} />
                 <PrivatePath component={HandleLoan} path="/loanpage" />
-                <PrivatePath path="/profile" component={Profile} exact /> 
+                <PrivatePath path="/profile" component={Profile} exact />
+                <PublicPath path="/login" component={LoginPage} exact /> 
+                <PublicPath path="/dealer" component={DealerHome} exact />
+                <PublicPath path="/admin" component={AdminHome} exact />
                 {/*<PublicPath restricted={false} component={HomePage} path="/" exact />*/}
-                <PublicPath component={LoginPage} path="/" exact />
+                <PublicPath component={HeroPage} path="/" exact />
                 <Route component={NotFoundPage} />
             </Switch>
            
