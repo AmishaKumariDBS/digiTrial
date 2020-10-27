@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux';
 import {login} from './Auth';
-
+import {loginById} from '../actions/users';
 class Login extends React.Component{
     constructor(props){
         super(props);
@@ -23,10 +23,17 @@ class Login extends React.Component{
         this.setState({password:e.target.value});
         console.log(`passw: ${this.state.password}`);
     }
+    onClickLogin(){
+        if(this.state.clientId){
+            let clientVar=this.state.clientId;
+            this.props.userLogin(clientVar);
+            this.props.history.push('/homepage');
+        }
+    }
 
     onClickLoginButton(){
         if(this.state.clientId){
-            console.log(this.state.clientId);
+            console.log(this.state.clientId);            
             // console.log(this.state.password);
             let clientVar=this.state.clientId;
             // let passwordVar=this.state.password;
@@ -103,7 +110,7 @@ class Login extends React.Component{
                 <div style={{backgroundColor:"red",color:"white", border:"solid",width:"30%", textAlign:"center",borderBlock:"black",transform:"translateX(160%)",marginTop:"6%"}}>
                 Client ID: <input style={{ marginTop:"20%",marginBottom:"5%"}} type="text" onChange={this.updateClientId} /><br/>
                 {/* Password: <input style={{ marginTop:"5%",marginBottom:"5%"}} type="password" onChange={this.updatePassword}/><br/> */}
-                <button style={{ backgroundColor:"red",color:"white",marginTop:"5%",marginBottom:"20%",paddingRight:"7%",paddingLeft:"7%"}} id="loginButton" onClick={this.onClickLoginButton}>Login</button>
+                <button style={{ backgroundColor:"red",color:"white",marginTop:"5%",marginBottom:"20%",paddingRight:"7%",paddingLeft:"7%"}} id="loginButton" onClick={()=>{this.onClickLogin()}}>Login</button>
                 {/* <p>Logging in for the first time?</p> */}
                 {/* <button id="setPassword" onClick={this.onClickSetPasswordButton} style={{backgroundColor:"red",color:"white", marginBottom:"5%"}}>Set Password</button><br/> */}
                 {/* <button style={{ backgroundColor:"red",color:"white",transform:"translateX(70%)",marginBottom:"5%",marginTop:"5%"}} onClick={this.onClickForgotPasswordButton}>Forgot Password?</button> */}
@@ -121,5 +128,11 @@ const  mapStateToProps = (state) =>{
       userData:state.loginData
     };
   }
+
+  const mapDispatchToProps = (dispatch) => {
+      return {
+        userLogin : (id) => dispatch(loginById(id))
+      }
+  }
   
-  export default connect(mapStateToProps)(Login);
+  export default connect(mapStateToProps,mapDispatchToProps)(Login);

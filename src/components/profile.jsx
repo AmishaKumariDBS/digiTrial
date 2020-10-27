@@ -89,7 +89,7 @@ class Profile extends React.Component{
         return(
             <div>
                 <div style={{backgroundColor:"red",color:"white", border:"solid",width:"30%", textAlign:"center",borderBlock:"black",transform:"translateX(160%)",marginTop:"6%"}}>
-        Client ID: <p>{localStorage.getItem("clientId")}</p>
+        Client ID: <p>{localStorage.getItem("ClientID")}</p>
         Email ID : <p>{localStorage.getItem("emailId")}</p>
         Mobile No : <p>{localStorage.getItem("mobileNo")}</p>
         Loan Category : <p>{localStorage.getItem("loanCategory")}</p>
