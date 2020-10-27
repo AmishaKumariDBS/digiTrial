@@ -89,11 +89,11 @@ class Profile extends React.Component{
         return(
             <div>
                 <div style={{backgroundColor:"red",color:"white", border:"solid",width:"30%", textAlign:"center",borderBlock:"black",transform:"translateX(160%)",marginTop:"6%"}}>
-        Client ID: <p>{localStorage.getItem("ClientID")}</p>
-        Email ID : <p>{localStorage.getItem("emailId")}</p>
-        Mobile No : <p>{localStorage.getItem("mobileNo")}</p>
-        Loan Category : <p>{localStorage.getItem("loanCategory")}</p>
-        Eligible Loan Amount : <p>{localStorage.getItem("eligibleLoanAmount")}</p>
+        Client ID: <p>{JSON.parse(localStorage.getItem('clientDetails')).customerId}</p>
+        Sex : <p>{JSON.parse(localStorage.getItem('clientDetails')).sex}</p>
+        Marital Status : <p>{JSON.parse(localStorage.getItem('clientDetails')).maritalStatus}</p>
+        Income : <p>{JSON.parse(localStorage.getItem('clientDetails')).income}</p>
+        Eligible EMI : <p>{JSON.parse(localStorage.getItem('clientDetails')).eMICapacity}</p>
                 {/* Password: <input style={{ marginTop:"5%",marginBottom:"5%"}} type="password" onChange={this.updatePassword}/><br/> */}
                 {/* <button style={{ backgroundColor:"red",color:"white",marginTop:"5%",marginBottom:"20%",paddingRight:"7%",paddingLeft:"7%"}} id="loginButton" onClick={this.onClickLoginButton}>Login</button> */}
                 {/* <p>Logging in for the first time?</p> */}

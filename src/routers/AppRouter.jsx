@@ -24,7 +24,6 @@ const AppRouter = () => (
                 {/*<Route path='/' component={LoginPage} exact={true}/>*/}
                 <PrivatePath path="/homepage" component={HomePage} exact={true}/>
                 <PrivatePath path="/cars/:id" component={DealDetails} />
-                <PrivatePath component={HandleLoan} path="/loanpage" />
                 <PrivatePath path="/profile" component={Profile} exact />
                 <PublicPath path="/login" component={LoginPage} exact /> 
                 <PublicPath path="/dealer" component={DealerHome} exact />

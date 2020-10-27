@@ -14,7 +14,7 @@ render(){
     return(
         <div>        
     <h2>My Details</h2>
-        Client ID: <p>{localStorage.getItem("ClientID")}</p>
+        Client ID: <p>{JSON.parse(localStorage.getItem('clientDetails')).customerId}</p>
         Car Cost :INR{this.props.data.carCost} <br />
         Loan Tenure Period :{this.props.data.time} Months
     <br />Loan Amount you have requested for : INR {this.props.data.loanAmount}<br/>
@@ -26,7 +26,7 @@ render(){
 }
 const mapStateToProps = (state) => {
     return {
-    data :  state.UserData,
+    data :  state.loanData,
     
     }
 }

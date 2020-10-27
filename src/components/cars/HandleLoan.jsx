@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getDealById} from '../../selectors/cars.js'
-import {DealDetails} from './DealDetails.jsx';
 import {getCarDeals} from '../../services/carService';
 import {setDeals} from '../../actions/cars/deals';
 import {appliedLoans} from '../../actions/Loan';
@@ -41,7 +40,7 @@ componentDidMount(){
 		this.state.selectedFile.name 
 	); 
     console.log(this.state.selectedFile);
-    console.log(this.props.data);
+    console.log(JSON.parse(localStorage.getItem('clientDetails')));
      
 };
 
@@ -56,7 +55,7 @@ eligible(time){
     }else{
         rate=9.5/1200;
     }
-var emi = this.props.data[0].eligibleemi;
+var emi = JSON.parse(localStorage.getItem('clientDetails')).eMICapacity;
 var t1=Math.pow((1+rate),time);
 var t2=(t1-1)/t1;
 
@@ -135,7 +134,7 @@ updatetime(e){
 
 onApply(){
     
-    const clientId=this.props.data[0].id;
+    const clientId=JSON.parse(localStorage.getItem('clientDetails')).customerId;
     const emi=this.state.emi;
     const time = this.state.time;
     //this.setState({emi:emi});
@@ -198,16 +197,16 @@ render(){
                 
     <h2>My Details</h2>
                 <label>Name:</label>
-                <input type="text" value={this.props.data[0].name} readOnly /><br/>                
+                <input type="text" value={JSON.parse(localStorage.getItem('clientDetails')).creditHistory} readOnly /><br/>                
                 <label>Client Id :</label>
-                <input type="text" value={this.props.data[0].clientId} readOnly /><br/>
+                <input type="text" value={JSON.parse(localStorage.getItem('clientDetails')).customerId} readOnly /><br/>
                 <label>Gender :</label>
-                <input type="text" value={this.props.data[0].gender} readOnly /><br/>
+                <input type="text" value={JSON.parse(localStorage.getItem('clientDetails')).sex} readOnly /><br/>
                 <label>Martial Status :</label>
-                <input type="text" value={this.props.data[0].martialStatus} readOnly /><br/> 
+                <input type="text" value={JSON.parse(localStorage.getItem('clientDetails')).maritalStatus} readOnly /><br/> 
                 <label>Eligible Emi</label>
-                <input type="text" value={this.props.data[0].eligibleemi} readOnly />
-                <h2>U selected {this.props.CarData.brand_name} <br />
+                <input type="text" value={JSON.parse(localStorage.getItem('clientDetails')).eMICapacity} readOnly />
+                <h2>U selected {console.log(this.props.CarData),this.props.CarData.car_name} <br />
                 {this.props.CarData.model}<br />
                 INR {this.props.CarData.price} <br />
                 from {this.props.CarData.dealer_name}</h2>
@@ -243,7 +242,6 @@ render(){
 }
 const mapStateToProps = (state,props) => {
     return {
-    data :  state.UserData,
     CarData: getDealById(state.carDeals,props.match.params.id)
     }
 }

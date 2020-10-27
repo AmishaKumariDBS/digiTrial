@@ -37,10 +37,6 @@ class Login extends React.Component{
             for(let i=0;i<this.props.userData.length;i++){
                 if(this.props.userData[i].clientId == clientVar){
                     console.log("Success"); 
-                    localStorage.setItem("emailId",this.props.userData[i].emailId);
-                    localStorage.setItem("mobileNo",this.props.userData[i].mobileNo);
-                    localStorage.setItem("loanCategory",this.props.userData[i].loanCategory);
-                    localStorage.setItem("eligibleLoanAmount",this.props.userData[i].eligibleLoanAmount);
                     alert(`Welcome ${clientVar}`);
                     login(this.state.clientId);
                     this.props.history.push('/homepage');

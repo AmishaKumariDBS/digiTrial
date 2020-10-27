@@ -1,6 +1,7 @@
-const TOKEN_KEY = 'ClientID';
+const TOKEN_KEY = 'clientDetails';
 export const login = (user) =>{
-    localStorage.setItem(TOKEN_KEY,user);
+    const json = JSON.stringify(user);
+    localStorage.setItem(TOKEN_KEY,json);
     console.log(localStorage.getItem(TOKEN_KEY));
 }
 

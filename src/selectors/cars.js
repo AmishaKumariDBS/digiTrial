@@ -1,5 +1,5 @@
 export const getDealById = (carDeals,id) => {
-    console.log("in selector",carDeals);
+    console.log("selected car = "+ carDeals.filter((deal)=>deal.id==id)[0]+" ID = "+id);
     return carDeals.filter((deal)=>deal.id==id)[0];
 }
 
