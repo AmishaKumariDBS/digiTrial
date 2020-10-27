@@ -16,7 +16,7 @@ const filteredDeals =  (carDeals,carFilters) => {
         return found;
     }
     
-       // console.log("in selector",carDeals);
+       console.log("in selector",carFilters);
        return carDeals.filter((carDeal)=>{
     //             console.log("inside filter",carDeal.price >= carFilters.minPrice && 
     //             carDeal.price <= carFilters.maxPrice && 
@@ -32,7 +32,7 @@ const filteredDeals =  (carDeals,carFilters) => {
     }).sort((a,b)=>{
         switch(carFilters.sortBy){
             case 'name' : return a.car_name > b.car_name ? carFilters.order:(-1*carFilters.order);
-            case 'price': return parseInt(a.price) > parseInt(b.price) ? carFilters.order:(-1*carFilters.order);
+            case 'price': return a.price > b.price ? carFilters.order:(-1*carFilters.order);
         }
     });
 }

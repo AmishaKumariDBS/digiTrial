@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {getDealById} from '../../selectors/cars.js';
 import {getCarDeals} from '../../services/carService';
 import {setDeals} from '../../actions/cars/deals';
+import {useHistory} from 'react-router-dom';
 
 const scrollToRef=(ref)=>window.scrollTo(0,ref.current.offsetTop);
 const scrollToTop = () => window.scrollTo(0,0);
@@ -25,11 +26,11 @@ const CarDealDetails = (props) => {
     const loanref = useRef(null);
     const dealerref = useRef(null);
     useMountEffect(()=>scrollToTop());
+    const history=useHistory();
     const handleLoan = () => {
-        props.history.push('/loanpage')
+        props.history.push(`/loanpage/${props.data.id}`)
     }
 
-    
     console.log(props.data);
     console.log("27",props,loading);
     return (

@@ -13,7 +13,7 @@ import HeroPage from '../components/heroPage.jsx'
 import DealerHome from '../components/dealerHome.jsx'
 import AdminHome from '../components/adminHome.jsx'
 export const history = createBrowserHistory();
-
+import AppliedLoan from '../components/cars/AppliedLoans.jsx'
 const AppRouter = () => (
         
             <BrowserRouter  history={history}>
@@ -29,6 +29,10 @@ const AppRouter = () => (
                 <PublicPath path="/login" component={LoginPage} exact /> 
                 <PublicPath path="/dealer" component={DealerHome} exact />
                 <PublicPath path="/admin" component={AdminHome} exact />
+                <PrivatePath component={HandleLoan} path="/loanpage/:id" />
+                <PrivatePath component={AppliedLoan} path="/appliedloan" />
+                
+                <PrivatePath path="/profile" component={Profile} exact /> 
                 {/*<PublicPath restricted={false} component={HomePage} path="/" exact />*/}
                 <PublicPath component={HeroPage} path="/" exact />
                 <Route component={NotFoundPage} />

@@ -4,7 +4,7 @@ const userData = [
         name:'user1',
         gender:'M',
         martialStatus:'unmarried',
-        loanAmount : 700000,
+        eligibleemi:30000,
     }
       
 ];
