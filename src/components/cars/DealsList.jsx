@@ -22,8 +22,9 @@ class CarDealsList extends React.Component{
       
     getCarDeals().then((response) => {
       console.log("in response",response.data)
-      this.setState(()=>({loading:false}));
       this.props.dispatch(setDeals(response.data));
+      this.setState(()=>({loading:false}));
+      
     });
   }
 
