@@ -14,13 +14,22 @@ render(){
     return(
         <div>        
     <h2>My Details</h2>
-        Client ID: <p>{JSON.parse(localStorage.getItem('clientDetails')).customerId}</p>
-        Car Cost :INR{this.props.data.carCost} <br />
-        Loan Tenure Period :{this.props.data.time} Months
-    <br />Loan Amount you have requested for : INR {this.props.data.loanAmount}<br/>
-    You need to pay EMI INR {this.props.data.emi}<br />
-    submitted document is {this.props.data.selectedFile.name}
-                
+        Client ID: <p>{JSON.parse(localStorage.getItem('clientDetails')).customerId}</p><br/>
+    
+       {  
+        this.props.data.length === 0 ? (
+      <div className="list-item list-item--message">
+        <span>No Applied Loans</span>
+      </div>
+    ): (this.props.data.map((loan)=>(<div>
+        Car Cost :INR{loan.carCost} <br />
+        Loan Tenure Period :{loan.time} Months
+    <br />Loan Amount you have requested for : INR {loan.loanAmount}<br/>
+    You need to pay EMI INR {loan.emi}<br />
+    submitted document is {loan.selectedFile.name}
+    <br/><br/><br/>
+    </div>)))
+       }
     </div>
  )};
 }

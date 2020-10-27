@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class Profile extends React.Component{
     constructor(props){
@@ -88,7 +89,10 @@ class Profile extends React.Component{
     render(){
         return(
             <div>
-                <div style={{backgroundColor:"red",color:"white", border:"solid",width:"30%", textAlign:"center",borderBlock:"black",transform:"translateX(160%)",marginTop:"6%"}}>
+            <Link to="/appliedloan">
+                    <h3 style={{transform:"translateX(60%)"}}>Applied Loans</h3>
+                </Link><br/>
+                <div style={{backgroundColor:"red",color:"white", border:"solid",width:"30%", textAlign:"center",borderBlock:"black",transform:"translateX(160%)",marginTop:"3%"}}>
         Client ID: <p>{JSON.parse(localStorage.getItem('clientDetails')).customerId}</p>
         Sex : <p>{JSON.parse(localStorage.getItem('clientDetails')).sex}</p>
         Marital Status : <p>{JSON.parse(localStorage.getItem('clientDetails')).maritalStatus}</p>
@@ -102,7 +106,6 @@ class Profile extends React.Component{
                 {/* <h1>Client ID: {this.state.clientId}</h1>
                 <h1>Password: {this.state.password}</h1> */}
                 </div>
-                
             </div>
         );
     }

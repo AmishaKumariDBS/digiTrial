@@ -11,16 +11,16 @@
     export default (state=defaultLoan,action) => {
         switch(action.type){
             case 'APPLIED_LOANS':
-               // return state.concat({...action});
-                return {
-                ...state,
-                clientId:action.clientId,
-                loanAmount:action.loanAmount,
-                carCost:action.carCost,
-                emi:action.emi,
-                selectedFile:action.selectedFile,
-                time:action.time
-                }
+                return state.concat(action);
+                // return {
+                // ...state,
+                // clientId:action.clientId,
+                // loanAmount:action.loanAmount,
+                // carCost:action.carCost,
+                // emi:action.emi,
+                // selectedFile:action.selectedFile,
+                // time:action.time
+                // }
                 
             default:
                  return state;
