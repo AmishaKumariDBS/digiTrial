@@ -1,7 +1,7 @@
 const defaultFilters = {
     minPrice:500000,
     maxPrice:1000000,
-    types:["SUV","Hatchback","Sedan"],
+    types:["SUV","Hatchback","Sedan","MUV","Minivan","Coupe","Hybrid","Luxury","Convertible","Pickup Truck","Wagon"],
     keywords:[""],
     sortBy:"price",
     order:1
