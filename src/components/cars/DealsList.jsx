@@ -66,7 +66,7 @@ render(){
             )}  
            onChange = {(e,page)=>this.onPageChange(e,page)}
            page={this.state.currentPage}
-           color="primary"
+           color="secondary"
            />
           
             {currentDeals.map((deal) => {
@@ -81,7 +81,7 @@ render(){
           )}  
           onChange = {(e,page)=>this.onPageChange(e,page)}
           page={this.state.currentPage}
-          color="primary"
+          color="secondary"
           />
     </div>
 );}

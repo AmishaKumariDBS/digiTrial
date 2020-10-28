@@ -15,7 +15,7 @@ render(){
     return(
         <center>
         <div className="div1">        
-    <h2 className="h2_heading">My Details</h2>
+    <h2 className="h2_heading">Applied Loan Details</h2>
        <h3> Client ID: <p>{JSON.parse(localStorage.getItem('clientDetails')).customerId}</p><br/>
     
        {  

@@ -213,8 +213,8 @@ render(){
                 from {this.props.CarData.dealer_name}
                </h2>
                 <h3>Select Tenure</h3>
-                <select onChange={(e)=>this.updatetime(e)} required>
-                    <option value="select time" >select Tenure</option>
+                <select onChange={(e)=>this.updatetime(e)} required defaultValue="select time">
+                    <option value="select time"  disabled>select Tenure</option>
                     <option value="24">24 months</option>
                     <option value="36">36 months</option>
                     <option value="48">48 months</option>
