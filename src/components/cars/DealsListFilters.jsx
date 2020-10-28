@@ -2,7 +2,7 @@ import React from 'react';
 import {Slider,Chip,TextField} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {setBudget,setBodyType,setSearch,setSort,setOrder} from '../../actions/cars/filters';
-import {onPageChange} from './DealsList.jsx';
+import {getCustomerCarBudget} from '../../customisation/cars.js';
 
 class DealsFilters extends React.Component{
 
@@ -18,6 +18,16 @@ class DealsFilters extends React.Component{
             sortBy:"price",
             order:1
           }
+        }
+
+        componentWillMount(){
+          const budget = getCustomerCarBudget();
+          const minBudget = budget - (0.2*budget);
+          const maxBudget = budget + (0.2*budget);
+          //set slider coordinates
+
+          //this.setState({value:});
+          this.props.dispatch(setBudget(minBudget,maxBudget));
         }
 
           onSearch(e){

@@ -55,7 +55,7 @@ eligible(time){
     }else{
         rate=9.5/1200;
     }
-var emi = JSON.parse(localStorage.getItem('clientDetails')).eMICapacity;
+var emi = (parseFloat(JSON.parse(localStorage.getItem('clientDetails')).eMICapacity)*54.27);
 var t1=Math.pow((1+rate),time);
 var t2=(t1-1)/t1;
 
@@ -206,11 +206,12 @@ render(){
                 <label>Martial Status :</label>
                 <input type="text" value={JSON.parse(localStorage.getItem('clientDetails')).maritalStatus} readOnly /><br/> 
                 <label>Eligible Emi</label>
-                <input type="text" value={JSON.parse(localStorage.getItem('clientDetails')).eMICapacity} readOnly />
-                U selected {console.log(this.props.CarData),this.props.CarData.car_name} <br />
+                <input type="text" value={(parseFloat(JSON.parse(localStorage.getItem('clientDetails')).eMICapacity)*54.27)} readOnly /></h3>
+                <h2>U selected {console.log(this.props.CarData),this.props.CarData.car_name} <br />
+                {this.props.CarData.model}<br />
                 INR {this.props.CarData.price} <br />
-                from {this.props.CarData.dealer_name}</h3>
-               
+                from {this.props.CarData.dealer_name}
+               </h2>
                 <h3>Select Tenure</h3>
                 <select onChange={(e)=>this.updatetime(e)} required>
                     <option value="select time" >select Tenure</option>
