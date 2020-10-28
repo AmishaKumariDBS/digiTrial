@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {logout} from './Auth.js';
 import {history} from '../routers/AppRouter.jsx';
 
-
 export default (props) =>{ 
     
     const handleLogout = () => {
@@ -13,7 +12,8 @@ export default (props) =>{
     
     return (
     <header>
-            <div style ={{display:"flex", flexDirection:"row", gap:"500px"}}>
+            <div style ={{display:"flex", flexDirection:"row", gap:"250px"}}>
+            
                 <Link className="header__title" to="/homepage">
                     <h1>Digital Bank</h1>
                 </Link>
