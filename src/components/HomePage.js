@@ -11,6 +11,24 @@ import { Button, Container, Row, Col, Carousel } from "reactstrap";
 class HomePage extends React.Component{
     constructor(props){
         super(props);
+        this.onClickCustomerButton=this.onClickCustomerButton.bind(this);
+        this.onClickDealerButton=this.onClickDealerButton.bind(this);
+        this.onClickAdminButton=this.onClickAdminButton.bind(this);
+    }
+
+    onClickCustomerButton(){
+        localStorage.setItem("roleName","Customer");
+        this.props.history.push("/login");
+    }
+
+    onClickDealerButton(){
+        localStorage.setItem("roleName","Dealer");
+        this.props.history.push("/login");
+    }
+   
+    onClickAdminButton(){
+        localStorage.setItem("roleName","Admin");
+        this.props.history.push("/login");
     }
     render(){
         return(
@@ -93,9 +111,9 @@ class HomePage extends React.Component{
     
                         <li className="nav-item">
                           <NavLink 
-                            
+                            onClick={this.onClickCustomerButton}
                             className="nav-link "
-                            to="/signin"
+                            to="/login"
                           >
                             Login
                           </NavLink>
